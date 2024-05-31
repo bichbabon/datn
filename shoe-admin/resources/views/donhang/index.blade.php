@@ -53,6 +53,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" id="printInvoiceBtn" class="btn btn-primary">In Hóa Đơn</button>
             </div>
         </div>
     </div>
@@ -136,6 +137,17 @@
 
         // Hiển thị modal
         $('#orderDetailModal').modal('show');
+        if (orderDetail.order.tinhtrang === 'hoanthanh') {
+                    document.getElementById('printInvoiceBtn').style.display = 'block';
+                    document.getElementById('printInvoiceBtn').onclick = function () {
+                        printInvoice(orderDetail.order.id);
+                    };
+                } else {
+                    document.getElementById('printInvoiceBtn').style.display = 'none';
+                }
+    }
+    function printInvoice(orderId) {
+        window.open(`http://localhost/shoe-api/public/api/inhoadon/${orderId}`, '_blank');
     }
 
 
